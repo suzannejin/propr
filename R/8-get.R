@@ -25,8 +25,8 @@ getResults <- function(object, cutoff = NA, include = NA, or = TRUE){
   # Unify @results slot subset procedure
   if(class(object) == "propr"){
 
-    if(object@metric %in% c("rho", "cor", "pcor", "pcor.shrink")){
-
+    if(isup(object@metric)){
+      
       outcome <- "propr"
       keep <- object@results[,outcome] >= cutoff
 

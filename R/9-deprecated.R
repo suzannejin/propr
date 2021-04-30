@@ -648,3 +648,35 @@ calculateFDR <- function(theta, ptheta, cutoff = seq(.6, .9, .1)){
 
   return(out)
 }
+
+#' Check if a metric is in dismay package
+#' 
+#' This function checks for a metric if it is implemented in
+#' the dismay R package
+#' 
+#' @param metric The name of the metric
+#' @return TRUE/FALSE
+isdismay <- function(metric){
+  metrics <- c("pearson", "spearman", "kendall", "zi_kendall", "partialcor"))
+  if (metric %in% metrics){
+    return(TRUE)
+  }else{
+    return(FALSE)
+  }
+}
+
+#' Check if a metric is better when higher
+#' 
+#' This function checks for a metric if it is better when  
+#' its value is higher
+#' 
+#' @param metric The name of the metric
+#' @return TRUE/FALSE
+isup <- function(metric){
+  metrics <- c("rho", "cor", "pearson", "spearman", "kendall", "zi_kendall", "partialcor")
+  if (metric %in% metrics){
+    return(TRUE)
+  }else{
+    return(FALSE)
+  }
+}

@@ -124,8 +124,9 @@ setMethod("show", "propr",
 
 #' @rdname propr
 #' @export
-propr <- function(counts, metric = c("rho", "phi", "phs", "cor", "pcor.shrink", "vlr"), 
-                  ivar = "clr", select, symmetrize = FALSE, alpha, p = 100){
+propr <- function(counts, ivar = "clr", select, symmetrize = FALSE, alpha, p = 100,
+                  metric = c("rho", "phi", "phs", "cor", "vlr",
+                             "pearson", "spearman", "kendall", "zi_kendall", "partialcor")){
 
   # Clean "count matrix"
   if("data.frame" %in% class(counts)) counts <- as.matrix(counts)
@@ -208,15 +209,14 @@ propr <- function(counts, metric = c("rho", "phi", "phs", "cor", "pcor.shrink", 
     mat <- lr2phs(lr)
   }else if(metric == "cor"){
     mat <- stats::cor(lr)
-  }else if(metric == "pcor.shrink"){
-    tmp <- corpcor::pcor.shrink(lr)
-    mat <- matrix(tmp, ncol=ncol(tmp), nrow=nrow(tmp))
-    rownames(mat) = rownames(tmp)
-    colnames(mat) = colnames(tmp)
   }else if(metric == "vlr"){
     mat <- lrv
   }else{
-    stop("Provided 'metric' not recognized.")
+    if (isdismay(metric)){
+      mat <- dismay::dismay(mat, metric = metric)
+    }else{
+      stop("Provided 'metric' not recognized.")
+    }
   }
 
   # Build propr object
@@ -304,3 +304,4 @@ phis <- function(counts, ...){
 corr <- function(counts, ...){
   propr(counts, metric = "cor", ...)
 }
+
