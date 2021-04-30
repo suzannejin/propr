@@ -657,7 +657,7 @@ calculateFDR <- function(theta, ptheta, cutoff = seq(.6, .9, .1)){
 #' @param metric The name of the metric
 #' @return TRUE/FALSE
 isdismay <- function(metric){
-  metrics <- c("pearson", "spearman", "kendall", "zi_kendall", "partialcor"))
+  metrics <- c("pearson", "spearman", "kendall", "zi_kendall", "partialcor")
   if (metric %in% metrics){
     return(TRUE)
   }else{
