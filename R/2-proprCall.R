@@ -205,7 +205,7 @@ updateCutoffs.propr <- function(object, cutoff, ncores){
   FDR$cutoff <- cutoff
   p <- length(object@permutes)
   FDR_ = FDR  # for negative tail
-  FDR$cutoff <- cutoff * -1
+  FDR_$cutoff <- cutoff * -1
 
   if(ncores > 1){
 
