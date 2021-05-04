@@ -124,9 +124,9 @@ setMethod("show", "propr",
 
 #' @rdname propr
 #' @export
-propr <- function(counts, ivar = "clr", select, symmetrize = FALSE, alpha, p = 100,
-                  metric = c("rho", "phi", "phs", "cor", "vlr",
-                             "pearson", "spearman", "kendall", "zi_kendall", "partialcor")){
+propr <- function(counts, metric = c("rho", "phi", "phs", "cor", "vlr",
+                  "pearson", "spearman", "kendall", "zi_kendall", "partialcor"),
+                  ivar = "clr", select, symmetrize = FALSE, alpha, p = 100){
 
   # Clean "count matrix"
   if("data.frame" %in% class(counts)) counts <- as.matrix(counts)
