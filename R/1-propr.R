@@ -213,7 +213,7 @@ propr <- function(counts, ivar = "clr", select, symmetrize = FALSE, alpha, p = 1
     mat <- lrv
   }else{
     if (isdismay(metric)){
-      mat <- dismay::dismay(mat, metric = metric)
+      mat <- dismay::dismay(lr, metric = metric)
     }else{
       stop("Provided 'metric' not recognized.")
     }

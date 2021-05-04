@@ -204,6 +204,8 @@ updateCutoffs.propr <- function(object, cutoff, ncores){
   colnames(FDR) <- c("cutoff", "randcounts", "truecounts", "FDR")
   FDR$cutoff <- cutoff
   p <- length(object@permutes)
+  FDR_ = FDR  # for negative tail
+  FDR$cutoff <- cutoff * -1
 
   if(ncores > 1){
 
@@ -238,7 +240,7 @@ updateCutoffs.propr <- function(object, cutoff, ncores){
       ct.k <- object@permutes[[k]]
       pr.k <- suppressMessages(
         propr(ct.k, object@metric, ivar = object@ivar, alpha = object@alpha))
-      pkt <- pr.k@results$propr
+      pkt = pkt_ <- pr.k@results$propr
 
       # Find number of permuted theta less than cutoff
       for(cut in 1:nrow(FDR)){ # randcounts as cumsum
@@ -246,8 +248,10 @@ updateCutoffs.propr <- function(object, cutoff, ncores){
         # Count positives as rho > cutoff, cor > cutoff, phi < cutoff, phs < cutoff
         if(isup(object@metric)){
           FDR[cut, "randcounts"] <- FDR[cut, "randcounts"] + sum(pkt > FDR[cut, "cutoff"])
+          FDR_[cut, "randcounts"] <- FDR_[cut, "randcounts"] + sum(pkt < FDR_[cut, "cutoff"])
         }else{ # phi & phs
           FDR[cut, "randcounts"] <- FDR[cut, "randcounts"] + sum(pkt < FDR[cut, "cutoff"])
+          FDR_[cut, "randcounts"] <- FDR_[cut, "randcounts"] + sum(pkt > FDR_[cut, "cutoff"])
         }
       }
     }
@@ -255,21 +259,26 @@ updateCutoffs.propr <- function(object, cutoff, ncores){
 
   # Calculate FDR based on real and permuted tallys
   FDR$randcounts <- FDR$randcounts / p # randcounts as mean
+  FDR_$randcounts <- FDR_$randcounts / p
 
   for(cut in 1:nrow(FDR)){
 
     # Count positives as rho > cutoff, cor > cutoff, phi < cutoff, phs < cutoff
     if(isup(object@metric)){
       FDR[cut, "truecounts"] <- sum(object@results$propr > FDR[cut, "cutoff"])
+      FDR_[cut, "truecounts"] <- sum(object@results$propr < FDR_[cut, "cutoff"])
     }else{ # phi & phs
       FDR[cut, "truecounts"] <- sum(object@results$propr < FDR[cut, "cutoff"])
+      FDR_[cut, "truecounts"] <- sum(object@results$propr > FDR_[cut, "cutoff"])
     }
 
     FDR[cut, "FDR"] <- FDR[cut, "randcounts"] / FDR[cut, "truecounts"]
+    FDR_[cut, "FDR"] <- FDR_[cut, "randcounts"] / FDR_[cut, "truecounts"]
   }
 
   # Initialize @fdr
   object@fdr <- FDR
+  object@fdr_ <- FDR_
 
   return(object)
 }
