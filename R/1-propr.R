@@ -55,7 +55,8 @@
 #' @slot results A data.frame. Stores the pairwise \code{propr} measurements.
 #' @slot permutes A list. Stores the shuffled transformed "count matrix"
 #'  instances, used to reproduce permutations of \code{propr}.
-#' @slot fdr A data.frame. Stores the FDR cutoffs for \code{propr}.
+#' @slot fdr A data.frame. Stores the FDR cutoffs on positive tail for \code{propr}.
+#' @slot fdr_ A data.frame. Stores the FDR cutoffs on negative tail for \code{propr}.
 #'
 #' @inheritParams all
 #' @return Returns a \code{propr} object.
@@ -80,6 +81,7 @@ setClass("propr",
            results = "data.frame",
            permutes = "list",
            fdr = "data.frame"
+           fdr_ = "data.frame"
          )
 )
 
