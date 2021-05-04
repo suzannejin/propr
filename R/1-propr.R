@@ -80,7 +80,7 @@ setClass("propr",
            pairs = "numeric",
            results = "data.frame",
            permutes = "list",
-           fdr = "data.frame"
+           fdr = "data.frame",
            fdr_ = "data.frame"
          )
 )
