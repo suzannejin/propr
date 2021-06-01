@@ -124,7 +124,9 @@ setMethod("show", "propr",
 
 #' @rdname propr
 #' @export
-propr <- function(counts, metric = c("rho", "phi", "phs", "cor"), ivar = "clr", select, symmetrize = FALSE, alpha, p = 100){
+propr <- function(counts, metric = c("rho", "phi", "phs", "cor",
+                  "pearson", "spearman", "zi_kendall", "partialcor"),
+                  ivar = "clr", select, symmetrize = FALSE, alpha, p = 100){
 
   # Clean "count matrix"
   # if(any(apply(counts, 2, function(x) all(x == 0)))){
@@ -195,7 +197,11 @@ propr <- function(counts, metric = c("rho", "phi", "phs", "cor"), ivar = "clr", 
   }else if(metric == "cor"){
     mat <- stats::cor(lr)
   }else{
-    stop("Provided 'metric' not recognized.")
+    if (metric %in% dismay::metrics()){
+      mat <- dismay::dismay(lr, metric = metric)
+    }else{
+      stop("Provided 'metric' not recognized.")
+    }
   }
 
   # Build propr object
