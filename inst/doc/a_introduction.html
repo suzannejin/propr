@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Thomas Quinn" />
+
+<meta name="date" content="2018-07-25" />
+
+<title>An Introduction to Proportionality</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">An Introduction to Proportionality</h1>
+<h4 class="author"><em>Thomas Quinn</em></h4>
+<h4 class="date"><em>2018-07-25</em></h4>
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>The bioinformatic evaluation of gene co-expression often begins with correlation-based analyses. However, correlation lacks validity when applied to relative data, including count data generated by next-generation sequencing. This vignette describes three metrics of proportionality that measure dependence between relative features using compositional data analysis: <span class="math inline">\(\phi\)</span> (Lovell 2015), <span class="math inline">\(\rho\)</span> (Lovell 2015; Erb 2016), and <span class="math inline">\(\phi_s\)</span> (Erb 2016; Quinn 2017). Unlike correlation, proportionality gives the same result for both relative and absolute data. Meanwhile, pairs that are strongly proportional in relative space are also strongly correlated in absolute space. Proportionality helps avoid the pitfall of spurious correlation.</p>
+</div>
+<div id="theory" class="section level2">
+<h2>Theory</h2>
+<p>Let <span class="math inline">\(A_i\)</span> and <span class="math inline">\(A_j\)</span> each represent a log-ratio transformed feature vector measured across <span class="math inline">\(N\)</span> samples. We then define the metrics <span class="math inline">\(\phi\)</span>, <span class="math inline">\(\rho\)</span>, and <span class="math inline">\(\phi_s\)</span>:</p>
+<p><span class="math display">\[\phi(A_i, A_j) = \frac{var(A_i - A_j)}{var(A_i)}\]</span></p>
+<p><span class="math display">\[\rho(A_i, A_j) = 1 - \frac{var(A_i - A_j)}{var(A_i) + var(A_j)}\]</span></p>
+<p><span class="math display">\[\phi_s(A_i, A_j) = \frac{var(A_i - A_j)}{var(A_i + A_j)}\]</span></p>
+<p>Log-ratio transformation is applied to each subject vector, <span class="math inline">\(x\)</span>, containing <span class="math inline">\(D\)</span> features (e.g., genes). In this vignette, we consider the centered log-ratio (clr) transformation and the additive log-ratio (alr) transformation. In clr-transformation, sample vectors undergo a transformation based on the logarithm of the ratio between the individual elements and the geometric mean of the vector, <span class="math inline">\(g(\textrm{x}) = \sqrt[D]{x_i...x_D}\)</span>. In alr-transformation, sample vectors undergo a transformation based on the logarithm of the ratio between the individual elements and chosen reference feature, <span class="math inline">\(x_D\)</span>. We define these accordingly:</p>
+<p><span class="math display">\[\textrm{clr(x)} = \left[\ln\frac{x_i}{g(\textrm{x})};...;\ln\frac{x_D}{g(\textrm{x})}\right]\]</span></p>
+<p><span class="math display">\[\textrm{alr(x)} = \left[\ln\frac{x_i}{x_D};...;\ln\frac{x_{D-1}}{x_D}\right]\]</span></p>
+<p>Note that this package also implements the interquartile log-ratio transformation (iqlr) as used by the <code>ALDEx2</code> package. For more information on integrating <code>propr</code> with <code>ALDEx2</code>, we refer the reader to the “Frequently Asked Questions” vignette.</p>
+</div>
+<div id="calculating-proportionality" class="section level2">
+<h2>Calculating proportionality</h2>
+<p>The measures <span class="math inline">\(\phi\)</span> and <span class="math inline">\(\rho\)</span> differ in three ways. First, the values of <span class="math inline">\(\phi\)</span> range from <span class="math inline">\([0, \infty)\)</span> (with lower <span class="math inline">\(\phi\)</span> values indicating more proportionality) while the values of <span class="math inline">\(\rho\)</span> range from <span class="math inline">\([-1, 1]\)</span> (with greater <span class="math inline">\(|\rho|\)</span> values indicating more proportionality and negative <span class="math inline">\(\rho\)</span> values indicating inverse proportionality). Second, <span class="math inline">\(\phi\)</span> lacks symmetry, although one can force symmetry by reflecting the lower left triangle of the matrix across the diagonal (toggled by the argument <code>symmetrize = TRUE</code>). Third, <span class="math inline">\(\rho\)</span> corrects for the individual variance of each feature in the pair, rather than for just one of the features. On the other hand, <span class="math inline">\(\phi_s\)</span> is a naturally symmetric variant of <span class="math inline">\(\phi\)</span> that also corrects for the individual variance of each feature in the pair.</p>
+<p>Let us begin by building an arbitrary dataset of 4 features (e.g., genes) measured across 100 subjects. In this example, the feature pairs “a” and “b” will show proportional change as will the feature pairs “c” and “d”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">12345</span>)
+N &lt;-<span class="st"> </span><span class="dv">100</span>
+X &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a=</span>(<span class="dv">1</span>:N), <span class="dt">b=</span>(<span class="dv">1</span>:N) *<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dv">10</span>, <span class="fl">0.1</span>),
+                <span class="dt">c=</span>(N:<span class="dv">1</span>), <span class="dt">d=</span>(N:<span class="dv">1</span>) *<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dv">10</span>, <span class="fl">1.0</span>))</code></pre></div>
+<p>Let <span class="math inline">\(D\)</span> represent any number of features measured across <span class="math inline">\(N\)</span> observations exposed to a binary or continuous event <span class="math inline">\(E\)</span>. For example, <span class="math inline">\(E\)</span> could represent differences in case-control status, treatment status, treatment dose, or time. These functions convert a “count matrix” with <span class="math inline">\(N\)</span> rows and <span class="math inline">\(D\)</span> columns into a proportionality matrix of <span class="math inline">\(D\)</span> rows and <span class="math inline">\(D\)</span> columns measuring proportionality for each feature pair. One can think of this matrix as analogous to a dissimilarity matrix (in the case of <span class="math inline">\(\phi\)</span>) or a correlation matrix (in the case of <span class="math inline">\(\rho\)</span>). The <code>propr</code> function returns a proportionality matrix bundled within an object of the class <code>propr</code>. This object contains four key slots:</p>
+<ul>
+<li><code>@counts</code> A matrix. Stores the original “count matrix” input.</li>
+<li><code>@logratio</code> A matrix. Stores the log-ratio transformed “count matrix”.</li>
+<li><code>@matrix</code> A matrix. Stores the proportionality metrics.</li>
+<li><code>@pairs</code> A vector. Indexes proportionality of interest.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(propr)
+phi &lt;-<span class="st"> </span><span class="kw">propr</span>(X, <span class="dt">metric =</span> <span class="st">&quot;phi&quot;</span>, <span class="dt">symmetrize =</span> <span class="ot">TRUE</span>)
+rho &lt;-<span class="st"> </span><span class="kw">propr</span>(X, <span class="dt">metric =</span> <span class="st">&quot;rho&quot;</span>, <span class="dt">ivar =</span> <span class="dv">0</span>)
+phs &lt;-<span class="st"> </span><span class="kw">propr</span>(X, <span class="dt">metric =</span> <span class="st">&quot;phs&quot;</span>, <span class="dt">ivar =</span> <span class="dv">0</span>)</code></pre></div>
+<p>Note that the log-ratio transformation, by its nature, fails if the input data contain any zero values. By default, this function replaces all zero values with 1. Alternatively, the user may set the parameter <code>alpha</code> greater than zero to approximate log-ratios in the presence of zeros (via the Box-Cox transformation). However, the topic of zero replacement is controversial. Proceed carefully when analyzing data that contain zero values.</p>
+</div>
+<div id="how-proportional-is-proportional-enough" class="section level2">
+<h2>How proportional is proportional enough?</h2>
+<p>By default, the <code>propr</code> function creates 100 permutations of the original data set, optionally used later by <code>updateCutoffs</code> to permute the false discovery rate (FDR) for a set of proportionality cutoffs. This method works for all proportionality measures, and yields the same results for each call (because the random seed is set by the original <code>propr</code> function). In the example below, there is no false discovery across the range of cutoffs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">updateCutoffs</span>(rho, <span class="dt">cutoff =</span>  <span class="kw">seq</span>(.<span class="dv">05</span>, .<span class="dv">95</span>, .<span class="dv">3</span>))</code></pre></div>
+<pre><code>## |------------(25%)----------(50%)----------(75%)----------|</code></pre>
+<pre><code>## Not weighted and not alpha-transformed 
+## @counts summary: 100 subjects by 4 features
+## @logratio summary: 100 subjects by 4 features
+## @matrix summary: 4 features by 4 features
+## @pairs summary: index with `[` method
+## @fdr summary: iterations
+##   cutoff randcounts truecounts FDR
+## 1   0.05          0          2   0
+## 2   0.35          0          2   0
+## 3   0.65          0          2   0
+## 4   0.95          0          2   0
+## See ?propr for object methods</code></pre>
+</div>
+<div id="subsetting-propr-objects" class="section level2">
+<h2>Subsetting propr objects</h2>
+<p>We have provided methods for indexing and subsetting objects belonging to the <code>propr</code> class. Using the familiar <code>[</code> method, we can efficiently index the proportionality matrix (i.e., the <code>@matrix</code> slot) based on an inequality operator and a reference value.</p>
+<p>In this first example, we use <code>[</code> to index the matrix by <span class="math inline">\(\rho &gt; .95\)</span>. This indexes the location of all values satisfying that inequality (i.e., in the lower left triangle of the matrix), and saves those indices to the <code>@pairs</code> slot. Indexing helps guide some of the bundled visualization methods in lieu of copy-on-modify subsetting. Note that indexing an already indexed object appends the new index to the previous index (via a union merge).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rho99 &lt;-<span class="st"> </span>rho[<span class="st">&quot;&gt;&quot;</span>, .<span class="dv">95</span>]
+rho99@pairs</code></pre></div>
+<pre><code>## [1]  2 12</code></pre>
+<p>Alternatively, using the <code>subset</code> method, we can subset an <em>entire</em> <code>propr</code> object based on a vector of feature indices or names. However, this method does copy-on-modify the proportionality matrix, making it potentially unsuitable for large datasets.</p>
+<p>In this second example, we subset by the feature names “a” and “b”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rhoab &lt;-<span class="st"> </span><span class="kw">subset</span>(rho, <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))
+rhoab@matrix</code></pre></div>
+<pre><code>##           a         b
+## a 1.0000000 0.9999151
+## b 0.9999151 1.0000000</code></pre>
+<p>The convenience function, <code>simplify</code>, can subset an <em>entire</em> <code>propr</code> object based on the index saved in its <code>@pairs</code> slot. This function converts the saved index into a paired list of coordinates and passes them along to the <code>subset</code> method. As such, this method does copy-on-modify the proportionality matrix, making it potentially unsuitable for large datasets. Unlike <code>subset</code>, <code>simplify</code> returns an object with the <code>@pairs</code> slot updated. Most users will find <code>simplify</code> preferable to <code>subset.</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">simplify</span>(rho99)</code></pre></div>
+<pre><code>## Not weighted and not alpha-transformed 
+## @counts summary: 100 subjects by 4 features
+## @logratio summary: 100 subjects by 4 features
+## @matrix summary: 4 features by 4 features
+## @pairs summary: 2 feature pairs
+## @fdr summary: iterations
+## See ?propr for object methods</code></pre>
+</div>
+<div id="visualizing-pairs" class="section level2">
+<h2>Visualizing pairs</h2>
+<p>Each feature belonging to a highly proportional data pair should have about the same log-ratio transformed abundance across all subjects. The method <code>plot</code> (or, equivalently, <code>smear</code>) provides a means by which to visually inspect whether this holds true. Since this function will plot all pairs unless indexed with the <code>[</code> method, we recommend the user first index or subset the <code>propr</code> object before plotting. A “noisy” relationship between some feature pairs could suggest that the proportionality cutoff is too lenient. We include this plot as a handy “sanity check” when working with high-dimensional datasets.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(rho99)</code></pre></div>
+<pre><code>## Alert: Generating plot using indexed feature pairs.</code></pre>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="computational-burden" class="section level2">
+<h2>Computational burden</h2>
+<p>High-throughput genomic sequencing has the ability to measure tens of thousands of features for each subject. Since calculating proportionality generates a matrix sized <span class="math inline">\(D^2\)</span>, this method uses a lot of RAM when applied to real biological datasets. To address this, <code>propr</code> harnesses the power of C++ (via the <code>Rcpp</code> package) to minimize the run-time and RAM overhead. Below, we provide a table that estimates the approximate amount of RAM needed to render a proportionality matrix based on the number of features studied. The user should account for up to 25% more RAM for subsequent <code>[</code> indexing and visualization.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Features</th>
+<th align="right">Peak RAM (MiB)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1000</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="right">2000</td>
+<td align="right">31</td>
+</tr>
+<tr class="odd">
+<td align="right">4000</td>
+<td align="right">123</td>
+</tr>
+<tr class="even">
+<td align="right">8000</td>
+<td align="right">491</td>
+</tr>
+<tr class="odd">
+<td align="right">16000</td>
+<td align="right">1959</td>
+</tr>
+<tr class="even">
+<td align="right">24000</td>
+<td align="right">4405</td>
+</tr>
+<tr class="odd">
+<td align="right">32000</td>
+<td align="right">7829</td>
+</tr>
+<tr class="even">
+<td align="right">64000</td>
+<td align="right">31301</td>
+</tr>
+<tr class="odd">
+<td align="right">100000</td>
+<td align="right">76406</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="limitations" class="section level2">
+<h2>Limitations</h2>
+<p>Although we developed this package with biological count data in mind, compositional count data is not truly compositional in that count data contain integer values only. As such, measuring “Gene A” as <span class="math inline">\(1\)</span> in one subject and “Gene B” as <span class="math inline">\(2\)</span> in another subject (i.e., the feature vector <span class="math inline">\([1, 2]\)</span>) does not carry the same information as measuring “Gene A” as <span class="math inline">\(1000\)</span> in one subject and “Gene B” as <span class="math inline">\(2000\)</span> in another subject (i.e., the feature vector <span class="math inline">\([1000, 2000]\)</span>) due to how additive variation affects the relative abundance of small counts more than large counts (Quinn 2017). We advise the investigator to proceed with caution when analyzing low counts.</p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<ol style="list-style-type: decimal">
+<li><p>Erb, Ionas, and Cedric Notredame. “How Should We Measure Proportionality on Relative Gene Expression Data?” Theory in Biosciences = Theorie in Den Biowissenschaften 135, no. 1-2 (June 2016): 21-36. <a href="http://dx.doi.org/10.1007/s12064-015-0220-8" class="uri">http://dx.doi.org/10.1007/s12064-015-0220-8</a>.</p></li>
+<li><p>Lovell, David, Vera Pawlowsky-Glahn, Juan José Egozcue, Samuel Marguerat, and Jürg Bähler. “Proportionality: A Valid Alternative to Correlation for Relative Data.” PLoS Computational Biology 11, no. 3 (March 2015): e1004075. <a href="http://dx.doi.org/10.1371/journal.pcbi.1004075" class="uri">http://dx.doi.org/10.1371/journal.pcbi.1004075</a>.</p></li>
+<li><p>Quinn, Thomas P., Mark F. Richardson, David Lovell, and Tamsyn M. Crowley. “Propr: An R-Package for Identifying Proportionally Abundant Features Using Compositional Data Analysis.” Scientific Reports 7, no. 1 (November 24, 2017): 16252. <a href="https://doi.org/10.1038/s41598-017-16520-0" class="uri">https://doi.org/10.1038/s41598-017-16520-0</a>.</p></li>
+</ol>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
